@@ -15,6 +15,10 @@ const productsData: Product[] = [
   { id: 2, name: "Perfume", price: 50, image: "/perfume.jpg" },
   { id: 3, name: "Eyeliner", price: 15, image: "/eyeliner.jpg" },
   { id: 4, name: "Foundation", price: 30, image: "/foundation.jpg" },
+  { id: 5, name: "Mascara", price: 28, image: "/Mascara.jpg" },
+  { id: 6, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg" },
+  { id: 7, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg" },
+  { id: 8, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg" },
 ];
 
 export default function ProductsPage() {
