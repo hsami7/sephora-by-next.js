@@ -8,23 +8,34 @@ type Product = {
   name: string;
   price: number;
   image: string;
+  category: string; // Add category!
 };
 
 const productsData: Product[] = [
-  { id: 1, name: "Lipstick", price: 20, image: "/lipstick.jpg" },
-  { id: 2, name: "Perfume", price: 50, image: "/perfume.jpg" },
-  { id: 3, name: "Eyeliner", price: 15, image: "/eyeliner.jpg" },
-  { id: 4, name: "Foundation", price: 30, image: "/foundation.jpg" },
-  { id: 5, name: "Mascara", price: 28, image: "/Mascara.jpg" },
-  { id: 6, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg" },
-  { id: 7, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg" },
-  { id: 8, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg" },
+  { id: 1, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
+  { id: 2, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 3, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
+  { id: 4, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
+  { id: 5, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
+  { id: 6, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg", category: "Lip" },
+  { id: 7, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
+  { id: 8, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
 ];
+
+// Get unique categories (with "All" option first)
+const categories = ["All", ...Array.from(new Set(productsData.map(p => p.category)))];
 
 export default function ProductsPage() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  const sortedProducts = [...productsData].sort((a, b) =>
+  // Filter by selected category then sort
+  const filteredProducts = (selectedCategory === "All"
+    ? productsData
+    : productsData.filter(p => p.category === selectedCategory)
+  );
+
+  const sortedProducts = [...filteredProducts].sort((a, b) =>
     sortOrder === "asc" ? a.price - b.price : b.price - a.price
   );
 
@@ -37,7 +48,7 @@ export default function ProductsPage() {
           fontSize: "2.2rem",
           fontWeight: "bold",
           marginBottom: "30px",
-          color: "#c2185b" // bright pink
+          color: "#c2185b"
         }}>
           Product Catalog
         </h1>
@@ -45,26 +56,52 @@ export default function ProductsPage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: "40px"
+          marginBottom: "40px",
+          gap: "35px"
         }}>
-          <label style={{ fontWeight: 600, marginRight: "10px" }}>
-            Sort by price:
-          </label>
-          <select
-            value={sortOrder}
-            onChange={e => setSortOrder(e.target.value as "asc" | "desc")}
-            style={{
-              padding: "7px 15px",
-              borderRadius: "20px",
-              border: "1px solid #c2185b",
-              outline: "none",
-              fontWeight: 600,
-              color: "#c2185b"
-            }}
-          >
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
-          </select>
+          {/* Category filter */}
+          <div>
+            <label style={{ fontWeight: 600, marginRight: "10px" }}>
+              Filter by category:
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={e => setSelectedCategory(e.target.value)}
+              style={{
+                padding: "7px 15px",
+                borderRadius: "20px",
+                border: "1px solid #c2185b",
+                outline: "none",
+                fontWeight: 600,
+                color: "#c2185b"
+              }}
+            >
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+          {/* Sort by price */}
+          <div>
+            <label style={{ fontWeight: 600, marginRight: "10px" }}>
+              Sort by price:
+            </label>
+            <select
+              value={sortOrder}
+              onChange={e => setSortOrder(e.target.value as "asc" | "desc")}
+              style={{
+                padding: "7px 15px",
+                borderRadius: "20px",
+                border: "1px solid #c2185b",
+                outline: "none",
+                fontWeight: 600,
+                color: "#c2185b"
+              }}
+            >
+              <option value="asc">Low to High</option>
+              <option value="desc">High to Low</option>
+            </select>
+          </div>
         </div>
         <div
           style={{
