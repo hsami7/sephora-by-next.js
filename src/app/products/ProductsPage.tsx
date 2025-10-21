@@ -8,20 +8,73 @@ type Product = {
   name: string;
   price: number;
   image: string;
+  category: string; // Add category!
 };
 
 const productsData: Product[] = [
-  { id: 1, name: "Lipstick", price: 20, image: "/lipstick.jpg" },
-  { id: 2, name: "Perfume", price: 50, image: "/perfume.jpg" },
-  { id: 3, name: "Eyeliner", price: 15, image: "/eyeliner.jpg" },
-  { id: 4, name: "Foundation", price: 30, image: "/foundation.jpg" },
-  
+  { id: 1, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
+  { id: 2, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 3, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
+  { id: 4, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
+  { id: 5, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
+  { id: 6, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg", category: "Lip" },
+  { id: 7, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
+  { id: 8, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
+  { id: 9, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
+  { id: 10, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 11, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
+  { id: 12, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
+  { id: 13, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
+  { id: 14, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg", category: "Lip" },
+  { id: 15, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
+  { id: 16, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
+  { id: 17, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
+  { id: 18, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 19, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
+  { id: 20, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
+  { id: 21, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
+  { id: 22, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg", category: "Lip" },
+  { id: 23, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
+  { id: 24, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
+  { id: 25, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
+  { id: 26, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 27, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
+  { id: 28, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
+  { id: 29, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
+  { id: 30, name: "Lip Contour", price: 18, image: "/Lip Contour.jpg", category: "Lip" },
+  { id: 31, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
+  { id: 32, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
+  { id: 33, name: "Blush", price: 39, image: "/blush.jpg"},
+  { id: 34, name: "Bronzer", price: 20, image: "/bronzer.jpg"},
+  { id: 35, name: "Cream bronzer", price: 22, image: "/Cream bronzer.jpg"},
+  { id: 36, name: "Highlighter" , price: 60, image: "/Highlighter.jpg"},
+  { id: 37, name: "Concealer", price: 25, image: "/Concealer.jpg"},
+  { id: 38, name: "Mascara", price: 18, image: "/Mascara.jpg"},
+  { id: 39, name: "Eyebrow pencil", price: 24, image: "/Eyebrow pencil.jpg"},
+  { id: 40, name: "Eyebrow powder", price: 18, image: "/Eyebrow powder.jpg"},
+  { id: 41, name: "Eyebrow gel", price: 22, image: "/Eyebrow gel.jpg"},
+  { id: 42, name: "Highlighter liquide", price: 32, image: "/Highlighter liquide.jpg"},
+  { id: 43, name: "Blush liquide", price: 40, image: "/Blush liquide.jpg" },
+  { id: 44, name: "Primer", price: 25, image: "/primer.jpg" },
+  { id: 45, name: "Fixateur", price: 20, image: "/Fixateur.jpg" },
+  { id: 46, name: "Eyeshadow", price: 22, image: "/Eyeshadow.jpg"},
+  { id: 47, name: "Prime mascara", price: 22, image: "/Prime mascara.jpg"},
 ];
+
+// Get unique categories (with "All" option first)
+const categories = ["All", ...Array.from(new Set(productsData.map(p => p.category)))];
 
 export default function ProductsPage() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  const sortedProducts = [...productsData].sort((a, b) =>
+  // Filter by selected category then sort
+  const filteredProducts = (selectedCategory === "All"
+    ? productsData
+    : productsData.filter(p => p.category === selectedCategory)
+  );
+
+  const sortedProducts = [...filteredProducts].sort((a, b) =>
     sortOrder === "asc" ? a.price - b.price : b.price - a.price
   );
 
@@ -34,7 +87,7 @@ export default function ProductsPage() {
           fontSize: "2.2rem",
           fontWeight: "bold",
           marginBottom: "30px",
-          color: "#c2185b" 
+          color: "#c2185b"
         }}>
           Product Catalog
         </h1>
@@ -42,26 +95,52 @@ export default function ProductsPage() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: "40px"
+          marginBottom: "40px",
+          gap: "35px"
         }}>
-          <label style={{ fontWeight: 600, marginRight: "10px" }}>
-            Sort by price:
-          </label>
-          <select
-            value={sortOrder}
-            onChange={e => setSortOrder(e.target.value as "asc" | "desc")}
-            style={{
-              padding: "7px 15px",
-              borderRadius: "20px",
-              border: "1px solid #c2185b",
-              outline: "none",
-              fontWeight: 600,
-              color: "#c2185b"
-            }}
-          >
-            <option value="asc">Low to High</option>
-            <option value="desc">High to Low</option>
-          </select>
+          {/* Category filter */}
+          <div>
+            <label style={{ fontWeight: 600, marginRight: "10px" }}>
+              Filter by category:
+            </label>
+            <select
+              value={selectedCategory}
+              onChange={e => setSelectedCategory(e.target.value)}
+              style={{
+                padding: "7px 15px",
+                borderRadius: "20px",
+                border: "1px solid #c2185b",
+                outline: "none",
+                fontWeight: 600,
+                color: "#c2185b"
+              }}
+            >
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+          {/* Sort by price */}
+          <div>
+            <label style={{ fontWeight: 600, marginRight: "10px" }}>
+              Sort by price:
+            </label>
+            <select
+              value={sortOrder}
+              onChange={e => setSortOrder(e.target.value as "asc" | "desc")}
+              style={{
+                padding: "7px 15px",
+                borderRadius: "20px",
+                border: "1px solid #c2185b",
+                outline: "none",
+                fontWeight: 600,
+                color: "#c2185b"
+              }}
+            >
+              <option value="asc">Low to High</option>
+              <option value="desc">High to Low</option>
+            </select>
+          </div>
         </div>
         <div
           style={{
