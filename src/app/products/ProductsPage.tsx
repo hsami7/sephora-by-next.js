@@ -15,6 +15,7 @@ const productsData: Product[] = [
   { id: 2, name: "Perfume", price: 50, image: "/perfume.jpg" },
   { id: 3, name: "Eyeliner", price: 15, image: "/eyeliner.jpg" },
   { id: 4, name: "Foundation", price: 30, image: "/foundation.jpg" },
+  
 ];
 
 export default function ProductsPage() {
@@ -33,7 +34,7 @@ export default function ProductsPage() {
           fontSize: "2.2rem",
           fontWeight: "bold",
           marginBottom: "30px",
-          color: "#c2185b" // bright pink
+          color: "#c2185b" 
         }}>
           Product Catalog
         </h1>
