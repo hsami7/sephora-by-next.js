@@ -21,7 +21,7 @@ const productsData: Product[] = [
   { id: 7, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
   { id: 8, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
   { id: 9, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
-  { id: 10, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 10, name:"Gris Dior", price: 50, image: "/Gris Dior.jpg", category: "Perfume" },
   { id: 11, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
   { id: 12, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
   { id: 13, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
@@ -29,7 +29,7 @@ const productsData: Product[] = [
   { id: 15, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
   { id: 16, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
   { id: 17, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
-  { id: 18, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 18, name: "Hugo boss", price: 50, image: "/Hugo boss.jpg", category: "Perfume" },
   { id: 19, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
   { id: 20, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
   { id: 21, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
@@ -37,7 +37,7 @@ const productsData: Product[] = [
   { id: 23, name: "Gloss Bomb", price: 30, image: "/Gloss Bomb.jpg", category: "Lip" },
   { id: 24, name: "Eyelash Curler", price: 9, image: "/Eyelash Curler.jpg", category: "Eye" },
   { id: 25, name: "Lipstick", price: 20, image: "/lipstick.jpg", category: "Lip" },
-  { id: 26, name: "Perfume", price: 50, image: "/perfume.jpg", category: "Perfume" },
+  { id: 26, name: "Eros versace", price: 50, image: "/Eros versace.jpg", category: "Perfume" },
   { id: 27, name: "Eyeliner", price: 15, image: "/eyeliner.jpg", category: "Eye" },
   { id: 28, name: "Foundation", price: 30, image: "/foundation.jpg", category: "Face" },
   { id: 29, name: "Mascara", price: 28, image: "/Mascara.jpg", category: "Eye" },
@@ -59,9 +59,16 @@ const productsData: Product[] = [
   { id: 45, name: "Fixateur", price: 20, image: "/Fixateur.jpg", category: "Face" },
   { id: 46, name: "Eyeshadow", price: 22, image: "/Eyeshadow.jpg", category: "Eye" },
   { id: 47, name: "Prime mascara", price: 22, image: "/Prime mascara.jpg", category: "Eye" },
+  { id: 48, name: "kayali", price: 54, image: "/kayali.jpg", category: "Perfume" },
+  { id: 49, name: "Linterdit", price: 59, image: "/Linterdit.jpg", category: "Perfume" },
+  { id: 50, name: "Naxos xerjoff", price: 49, image: "/Naxos xerjoff.jpg", category: "Perfume" },
+  { id: 51, name: "Poison Dior", price: 45, image: "/Poison Dior.jpg", category: "Perfume" },
+  { id: 52, name: "Stronger with you", price: 60, image: "/Stronger with you.jpg", category: "Perfume" },
+  { id: 53, name: "Black Opium", price: 55, image: "/Black Opium.jpg", category: "Perfume" },
+  { id: 54, name: "Brit perfume", price: 69, image: "/Brit perfume.jpg", category: "Perfume" },
+
 ];
 
-// Get unique categories (with "All" option first)
 const categories = ["All", ...Array.from(new Set(productsData.map(p => p.category)))];
 
 export default function ProductsPage() {
