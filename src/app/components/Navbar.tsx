@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 
 export default function Navbar() {
@@ -19,7 +18,7 @@ export default function Navbar() {
     }}>
       <Link href="/" style={{ color: "#fff", textDecoration: "none" }}>Home</Link>
       <Link href="/products" style={{ color: "#fff", textDecoration: "none" }}>Products</Link>
-      <Link href="#" style={{ color: "#fff", textDecoration: "none" }}>Contact</Link>
+      <Link href="/contact" style={{ color: "#fff", textDecoration: "none" }}>Contact</Link>
       {/* Add more links if needed */}
     </nav>
   );
